@@ -33,7 +33,9 @@ I am continuously solving SQL problems and updating this repository to reflect *
 ## 📬 Connect With Me
 
 **Name:** MEENAKSHI RAJPUROHIT
+
 **Degree:** B.Tech in Computer Science
+
 **Email:** imeenakshii28@gmail.com
 
 I am open to learning opportunities, internships, and collaborations in **Data Analytics and SQL**.

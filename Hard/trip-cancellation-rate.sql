@@ -1,0 +1,27 @@
+-- Problem: Trips and Users (Cancellation Rate)
+-- Platform: LeetCode
+-- Difficulty: Medium
+-- Description:
+-- Calculate the daily cancellation rate of trips.
+-- Only include trips where both client and driver are not banned.
+-- Cancellation rate = cancelled trips / total trips per day.
+
+SELECT 
+    t.request_at AS Day,
+    ROUND(
+        SUM(CASE 
+                WHEN t.status != 'completed' THEN 1 
+                ELSE 0 
+            END) * 1.0 / COUNT(*), 
+        2
+    ) AS "Cancellation Rate"
+FROM Trips t
+JOIN Users c 
+    ON t.client_id = c.users_id
+JOIN Users d 
+    ON t.driver_id = d.users_id
+WHERE 
+    c.banned = 'No'
+    AND d.banned = 'No'
+    AND t.request_at BETWEEN '2013-10-01' AND '2013-10-03'
+GROUP BY t.request_at;

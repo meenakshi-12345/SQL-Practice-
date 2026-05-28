@@ -1,0 +1,3 @@
+SELECT * 
+FROM employees 
+WHERE emp_name LIKE '_r%';

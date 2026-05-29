@@ -1,0 +1,8 @@
+SELECT DISTINCT 
+    m.product_name
+FROM orders m
+WHERE m.amount > (
+    SELECT AVG(n.amount)
+    FROM orders n 
+    WHERE m.customer_name = n.customer_name
+);

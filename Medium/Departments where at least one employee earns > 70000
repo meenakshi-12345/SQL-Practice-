@@ -1,0 +1,4 @@
+SELECT DISTINCT 
+    department
+FROM employees
+WHERE salary > 70000;

@@ -1,0 +1,8 @@
+SELECT DISTINCT 
+    c.customer_name 
+FROM orders c
+WHERE c.amount < (
+    SELECT AVG(d.amount)
+    FROM orders d 
+    WHERE c.customer_name = d.customer_name
+);

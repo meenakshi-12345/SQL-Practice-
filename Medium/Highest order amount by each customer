@@ -1,0 +1,5 @@
+SELECT 
+    customer_name,
+    MAX(amount) AS highest_order
+FROM orders 
+GROUP BY customer_name;

@@ -1,0 +1,8 @@
+SELECT 
+    o1.customer_name
+FROM orders o1 
+WHERE o1.amount > (
+    SELECT AVG(o2.amount)
+    FROM orders o2 
+    WHERE o1.customer_name = o2.customer_name
+);

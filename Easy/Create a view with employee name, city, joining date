@@ -1,0 +1,6 @@
+CREATE VIEW employee_basic_info AS
+SELECT 
+    emp_name, 
+    city, 
+    joining_date
+FROM employees;

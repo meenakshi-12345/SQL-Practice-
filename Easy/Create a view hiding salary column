@@ -1,0 +1,8 @@
+CREATE VIEW employee_without_salary AS
+SELECT 
+    emp_id,
+    emp_name,
+    department_id,
+    city,
+    joining_date
+FROM employees;

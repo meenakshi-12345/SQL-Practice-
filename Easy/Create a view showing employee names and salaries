@@ -1,0 +1,7 @@
+CREATE VIEW emp_details AS
+SELECT 
+    emp_name, 
+    salary
+FROM employees;
+
+SELECT * FROM emp_details;

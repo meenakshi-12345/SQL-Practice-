@@ -1,0 +1,14 @@
+CREATE VIEW highest_salary_employee AS
+SELECT 
+    emp_id,
+    city
+FROM employees 
+WHERE salary = (
+    SELECT MAX(salary)
+    FROM employees
+);
+
+CREATE VIEW delhi_highest_salary_employee AS
+SELECT * 
+FROM highest_salary_employee
+WHERE city = 'Delhi';

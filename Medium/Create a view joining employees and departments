@@ -1,0 +1,8 @@
+CREATE VIEW employee_department_view AS
+SELECT 
+    e.emp_name, 
+    d.dept_name, 
+    e.salary 
+FROM employees e
+JOIN departments d 
+    ON e.department_id = d.dept_id;

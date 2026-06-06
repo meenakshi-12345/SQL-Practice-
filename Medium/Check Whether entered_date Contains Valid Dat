@@ -1,0 +1,4 @@
+SELECT 
+    entered_date,
+    ISDATE(entered_date) AS valid_or_not
+FROM customer_orders;

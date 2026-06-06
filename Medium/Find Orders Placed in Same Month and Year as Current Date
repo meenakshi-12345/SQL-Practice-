@@ -1,0 +1,5 @@
+SELECT 
+    order_id
+FROM customer_orders
+WHERE MONTH(order_date) = MONTH(GETDATE())
+AND YEAR(order_date) = YEAR(GETDATE());

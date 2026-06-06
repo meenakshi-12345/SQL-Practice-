@@ -1,0 +1,4 @@
+SELECT 
+    order_id,
+    FORMAT(order_date, 'dd-MM-yyyy') AS formatted_date
+FROM customer_orders;

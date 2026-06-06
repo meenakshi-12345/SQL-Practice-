@@ -1,0 +1,4 @@
+SELECT 
+    order_id,
+    DATEADD(DAY, -10, delivery_date) AS updated_delivery
+FROM customer_orders;

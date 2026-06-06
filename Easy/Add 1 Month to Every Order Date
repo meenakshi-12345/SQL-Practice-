@@ -1,0 +1,4 @@
+SELECT 
+    order_id,
+    DATEADD(MONTH, 1, order_date) AS next_month_date
+FROM customer_orders;

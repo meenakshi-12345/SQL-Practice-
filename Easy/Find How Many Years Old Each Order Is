@@ -1,0 +1,5 @@
+
+SELECT 
+    order_id,
+    DATEDIFF(YEAR, order_date, GETDATE()) AS order_age_years
+FROM customer_orders;

@@ -1,0 +1,5 @@
+
+SELECT 
+    customer_name,
+    DATENAME(MONTH, order_date) AS order_month
+FROM customer_orders;

@@ -1,0 +1,4 @@
+SELECT 
+    order_id,
+    FORMAT(amount, 'C', 'en-IN') AS formatted_amount
+FROM customer_orders;

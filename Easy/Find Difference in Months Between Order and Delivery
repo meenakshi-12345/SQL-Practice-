@@ -1,0 +1,4 @@
+SELECT 
+    order_id,
+    DATEDIFF(MONTH, order_date, delivery_date) AS month_difference
+FROM customer_orders;

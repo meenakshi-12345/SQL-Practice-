@@ -1,0 +1,4 @@
+SELECT 
+    order_id,
+    EOMONTH(DATEADD(MONTH, 2, order_date)) AS future_month_end
+FROM customer_orders;

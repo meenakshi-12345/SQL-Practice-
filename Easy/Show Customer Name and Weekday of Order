@@ -1,0 +1,4 @@
+SELECT 
+    customer_name,
+    DATENAME(WEEKDAY, order_date) AS weekday_name
+FROM customer_orders;

@@ -1,0 +1,4 @@
+SELECT 
+    order_id,
+    EOMONTH(order_date) AS month_end
+FROM customer_orders;

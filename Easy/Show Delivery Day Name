@@ -1,0 +1,5 @@
+SELECT 
+    order_id,
+    DATENAME(WEEKDAY, delivery_date) AS delivery_day
+FROM customer_orders;
+

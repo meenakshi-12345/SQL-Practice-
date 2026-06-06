@@ -1,0 +1,4 @@
+SELECT 
+    order_id,
+    FORMAT(order_date, 'MMMM yyyy') AS formatted_month
+FROM customer_orders;

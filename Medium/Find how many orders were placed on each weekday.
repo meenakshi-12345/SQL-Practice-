@@ -1,0 +1,4 @@
+SELECT DATENAME(WEEKDAY,order_date), COUNT(order_id) 
+FROM sales_orders 
+WHERE DATENAME(WEEKDAY,order_date) NOT IN ('saturday','sunday')
+GROUP BY DATENAME(WEEKDAY,order_date)

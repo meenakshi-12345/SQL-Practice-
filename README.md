@@ -1,3 +1,7 @@
+<img width="3654" height="1954" alt="sql" src="https://github.com/user-attachments/assets/7b58cea3-c64a-4936-94dc-9e54804259bf" />
+
+
+
 # 📊 SQL Practice Repository
 
 This repository contains my structured **SQL practice solutions from HackerRank**, organized by difficulty level to track my learning progress and strengthen my data analysis skills.

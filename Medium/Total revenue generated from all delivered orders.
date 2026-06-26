@@ -1,0 +1,5 @@
+SELECT SUM(p.price*o.quantity) AS total_revenue_from_delivered
+FROM products p 
+JOIN Order_Items o ON p.product_id = o.product_id
+JOIN orders q ON q.order_id = o.order_id 
+WHERE q.order_status = 'Delivered';

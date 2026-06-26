@@ -1,0 +1,6 @@
+SELECT FORMAT(o.order_date,'MMMM') AS months, SUM(p.price*q.quantity) as TOTAL 
+FROM orders o
+JOIN Order_Items q ON o.order_id = q.order_id
+JOIN  Products p ON p.product_id = q.product_id
+GROUP BY FORMAT(o.order_date,'MMMM')
+ORDER BY total DESC

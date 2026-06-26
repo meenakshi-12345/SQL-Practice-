@@ -1,0 +1,6 @@
+
+SELECT TOP 1 p.product_name, SUM(q.quantity) AS total_quantity
+FROM Products p 
+JOIN Order_Items q ON p.product_id = q.product_id
+GROUP BY p.product_name 
+ORDER BY total_quantity DESC 

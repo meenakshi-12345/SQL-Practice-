@@ -1,0 +1,4 @@
+SELECT p.category,p.product_name, SUM(p.price*q.quantity) AS revenue, DENSE_RANK() OVER(PARTITION BY category ORDER BY SUM(p.price*q.quantity) DESC)
+FROM products p 
+JOIN Order_Items q ON p.product_id = q.product_id
+GROUP BY p.category,p.product_name

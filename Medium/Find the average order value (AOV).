@@ -1,0 +1,4 @@
+SELECT SUM(p.price*q.quantity) / COUNT(DISTINCT(o.order_id))
+FROM Products p 
+JOIN Order_Items q ON p.product_id = q.product_id
+JOIN orders o ON q.order_id = o.order_id

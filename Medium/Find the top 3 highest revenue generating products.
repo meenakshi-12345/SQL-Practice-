@@ -1,0 +1,8 @@
+WITH CTE AS (
+SELECT p.product_name, SUM(p.price*q.quantity) AS sales, RANK() OVER(ORDER BY  SUM(p.price*q.quantity) DESC)  AS ranking
+FROM Products p 
+JOIN Order_Items q  ON p.product_id = q.product_id 
+GROUP BY p.product_name
+) 
+SELECT * FROM CTE 
+WHERE ranking<4

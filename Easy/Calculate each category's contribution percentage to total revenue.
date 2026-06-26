@@ -1,0 +1,5 @@
+
+SELECT p.category, SUM(p.price*q.quantity) / (SELECT SUM(p.price*q.quantity) FROM Products p JOIN Order_Items q ON  p.product_id = q.product_id)*100
+FROM Products p 
+JOIN Order_Items q ON p.product_id = Q.product_id 
+GROUP BY p.category

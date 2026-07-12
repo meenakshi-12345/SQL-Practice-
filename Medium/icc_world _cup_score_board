@@ -1,0 +1,11 @@
+SELECT team_name, COUNT(*) AS no_of_matches_played, SUM(win_flag) AS no_of_matches_won, COUNT(*)-SUM(win_flag) AS no_of_losses 
+FROM (
+SELECT 
+team_1 AS team_name, case when team_1 = winner then 1 else 0 end as win_flag 
+FROM icc_world_cup 
+UNION ALL 
+SELECT 
+team_2 AS team_name, case when team_2 = winner then 1 else 0 end as win_flag 
+FROM icc_world_cup 
+) t
+GROUP BY team_name

@@ -1,0 +1,16 @@
+WITH CTE AS (
+SELECT c.customer_name,
+       SUM(o.total_amount) AS revenue_generated
+FROM Customers c
+JOIN Orders o
+ON c.customer_id = o.customer_id
+GROUP BY c.customer_name
+)
+SELECT TOP 1 *,
+ROUND(
+    revenue_generated * 100.0 /
+    (SELECT SUM(revenue_generated) FROM CTE),
+    2
+) AS percentage_cal
+FROM CTE
+ORDER BY percentage_cal DESC;

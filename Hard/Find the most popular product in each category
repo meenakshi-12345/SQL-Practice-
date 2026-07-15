@@ -1,0 +1,19 @@
+WITH CTE AS (
+SELECT
+    p.category,
+    o.product_id,
+    COUNT(*) AS times_sold,
+    DENSE_RANK() OVER(
+        PARTITION BY p.category
+        ORDER BY COUNT(*) DESC
+    ) AS rnk
+FROM Orders o
+JOIN Products p
+ON o.product_id = p.product_id
+GROUP BY
+    o.product_id,
+    p.category
+)
+SELECT *
+FROM CTE
+WHERE rnk = 1;

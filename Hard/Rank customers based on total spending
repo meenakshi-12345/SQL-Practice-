@@ -1,0 +1,8 @@
+SELECT
+customer_id,
+SUM(total_amount),
+RANK() OVER(
+ORDER BY SUM(total_amount) DESC
+)
+FROM Orders
+GROUP BY customer_id;

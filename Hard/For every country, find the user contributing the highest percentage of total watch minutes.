@@ -1,0 +1,16 @@
+WITH CTE AS (
+SELECT u.country,u.user_name,SUM(w.watch_minutes) AS total_minutes
+FROM Users u 
+JOIN WatchHistory w ON u.user_id = w.user_id
+GROUP BY u.user_name, u.country
+
+), 
+ranking AS (
+SELECT *, 
+SUM(total_minutes) OVER (PARTITION BY country) AS country_total,
+DENSE_RANK() OVER(PARTITION BY country ORDER BY total_minutes DESC) AS rnk
+FROM CTE
+)
+SELECT *, total_minutes*100.0/country_total
+FROM ranking 
+WHERE rnk = 1

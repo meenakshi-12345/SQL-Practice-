@@ -1,0 +1,4 @@
+SELECT genre, SUM(watch_minutes) AS total_watch_minutes
+FROM MovieStreams 
+GROUP BY genre 
+ORDER BY total_watch_minutes

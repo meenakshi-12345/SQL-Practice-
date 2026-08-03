@@ -1,0 +1,9 @@
+SELECT * FROM MovieStreams;
+
+WITH CTE AS (
+SELECT user_name, SUM(watch_minutes) AS watch_mins
+FROM MovieStreams
+GROUP BY user_name
+)
+SELECT *, watch_mins*100.0/ SUM(watch_mins)OVER() AS contri
+FROM CTE

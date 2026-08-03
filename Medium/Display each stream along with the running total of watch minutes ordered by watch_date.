@@ -1,0 +1,2 @@
+SELECT watch_date,watch_minutes, SUM(watch_minutes) OVER(ORDER BY watch_date) AS running_total
+FROM MovieStreams

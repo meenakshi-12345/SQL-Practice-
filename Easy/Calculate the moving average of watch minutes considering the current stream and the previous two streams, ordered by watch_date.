@@ -1,0 +1,2 @@
+SELECT watch_date, AVG(watch_minutes) OVER(ORDER BY watch_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
+FROM MovieStreams

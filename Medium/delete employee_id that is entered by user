@@ -1,0 +1,11 @@
+CREATE PROCEDURE dlt_emp @employee_id INT 
+AS
+BEGIN 
+
+DELETE FROM employees 
+WHERE employee_id =@employee_id
+
+END
+
+
+EXEC dlt_emp 101

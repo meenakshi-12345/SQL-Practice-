@@ -1,0 +1,15 @@
+CREATE PROCEDURE salary_hike @employee_id INT 
+AS
+BEGIN
+
+SELECT 
+CASE WHEN salary<50000 THEN salary+(salary*0.15)
+     WHEN salary BETWEEN 50000 AND 70000 THEN salary+(salary*0.10) 
+     WHEN salary > 70000 THEN salary+(salary*0.05) 
+     END AS salary_hike
+FROM employees 
+WHERE employee_id = @employee_id
+
+END 
+
+EXEC salary_hike 105

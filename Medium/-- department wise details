@@ -1,0 +1,11 @@
+CREATE PROCEDURE dept_details @department VARCHAR(50) 
+AS 
+BEGIN
+SELECT department, COUNT(*) AS no_of_emp, AVG(salary) AS avg_sal, MAX(salary) AS max_sal, MIN(salary) AS min_sal 
+FROM employees 
+WHERE department = @department
+GROUP BY department
+END
+
+
+EXEC dept_details 'Finance'

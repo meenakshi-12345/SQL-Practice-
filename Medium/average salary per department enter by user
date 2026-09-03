@@ -1,0 +1,10 @@
+CREATE PROCEDURE avg_sal @department VARCHAR(50)
+AS
+BEGIN
+SELECT department, AVG(salary) AS avg_value
+FROM employees
+WHERE department = @department
+GROUP BY department 
+END
+
+EXEC avg_sal 'HR'

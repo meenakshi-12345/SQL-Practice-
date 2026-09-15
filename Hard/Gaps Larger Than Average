@@ -1,0 +1,12 @@
+WITH CTE AS(
+SELECT user_id, start_date, LAG(start_date) OVER(ORDER BY user_id) AS Lag 
+FROM users
+  ),
+  CTE2 AS (
+  SELECT *, julianday(start_date) - julianday(lag) AS gap_days
+  FROM CTE
+    )
+    
+    SELECT *
+    FROM CTE2
+    WHERE gap_days > (SELECT AVG(gap_days) FROM CTE2)

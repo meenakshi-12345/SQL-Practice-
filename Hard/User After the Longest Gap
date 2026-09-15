@@ -1,0 +1,12 @@
+WITH CTE AS (
+SELECT user_id, start_date,LAG(start_date) OVER(ORDER BY user_id) AS lag
+FROM  USERS
+  ),CTE2 AS(
+  SELECT *, julianday(start_date) - julianday(lag) AS gap_days
+  FROM CTE
+    )
+    SELECT user_id, start_date
+    FROM CTE2 
+    WHERE  start_date >= ( SELECT start_date FROM CTE2
+    				              WHERE gap_days = (SELECT MAX(gap_days) FROM CTE2))
+                          LIMIT 1

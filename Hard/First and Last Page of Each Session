@@ -1,0 +1,16 @@
+WITH CTE AS(
+SELECT e.visit_id AS visit_id,p.page_name AS first_page ,e.event_time AS first_event_time, ROW_NUMBER() OVER(PARTITION BY e.visit_id ORDER BY e.sequence_number)  AS row_num
+FROM events e 
+JOIN page_hierarchy p ON e.page_id = p.page_id
+ ),
+ 
+ CTE2 AS (
+ SELECT e.visit_id AS visit_id,p.page_name AS last_page ,e.event_time AS last_event_time, ROW_NUMBER() OVER(PARTITION BY e.visit_id ORDER BY e.sequence_number DESC)  AS row_num2
+FROM events e 
+JOIN page_hierarchy p ON e.page_id = p.page_id
+ 
+ )
+ SELECT a.visit_id, a.first_page, a.first_event_time,b.last_page,b.last_event_time 
+ FROM CTE a
+ JOIN CTE2 b ON a.visit_id = b.visit_id 
+ WHERE a.row_num=1 AND b.row_num2 = 1

@@ -1,0 +1,13 @@
+WITH CTE AS (
+SELECT user_id,cookie_id,start_date, LAG(start_date) OVER(ORDER BY start_date) AS prev_day 
+FROM users
+  ),
+  CTE2 AS (
+    SELECT *, julianday(start_date) - julianday(prev_day) AS days_diff
+    FROM CTE
+  )
+  SELECT user_id,cookie_id,start_date, 
+  CASE WHEN days_diff<=7 THEN "Joined Close" 
+  ELSE "Normal Join"
+  END AS join_proximity 
+  FROM CTE2

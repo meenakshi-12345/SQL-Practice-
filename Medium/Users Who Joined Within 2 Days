@@ -1,0 +1,14 @@
+WITH CTE AS (
+SELECT user_id, cookie_id, start_date AS start_date, LAG(start_date) OVER(ORDER BY user_id) AS previous_days
+FROM Users
+  ),
+  CTE2 AS (
+         SELECT *, julianday(start_date) - julianday(previous_days) AS date_diff
+         FROM CTE
+  
+  )
+  SELECT user_id,cookie_id,start_date
+  FROM CTE2
+  WHERE  date_diff<=2
+  
+  

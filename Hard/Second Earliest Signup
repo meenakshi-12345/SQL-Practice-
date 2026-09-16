@@ -1,0 +1,10 @@
+WITH CTE AS (
+SELECT user_id, cookie_id, start_date AS start_date, RANK() OVER(ORDER BY start_date) AS rnk
+FROM Users 
+WHERE start_date > (
+SELECT MIN(start_date) 
+FROM users )
+  )
+  SELECT *
+  FROM CTE 
+  WHERE rnk =1

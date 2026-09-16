@@ -1,0 +1,14 @@
+WITH CTE AS (
+SELECT user_id,login_date, LAG(login_date) OVER(ORDER BY login_id) AS prev_date
+FROM LOGINS
+  ),
+  CTE2 AS 
+  (
+  SELECT *, 
+  julianday(login_date) - julianday(prev_date) AS date_diff
+  FROM CTE
+
+)
+SELECT *
+FROM CTE2 
+WHERE date_diff = 1

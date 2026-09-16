@@ -1,0 +1,7 @@
+SELECT user_id, cookie_id, start_date 
+FROM Users 
+WHERE start_date > (
+SELECT start_date 
+FROM users 
+WHERE user_id = 2
+  )

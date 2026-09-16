@@ -1,0 +1,3 @@
+SELECT user_id, start_date, COUNT(user_id) OVER(ORDER BY start_date ) AS cumulative_users 
+FROM Users
+ORDER BY start_date;

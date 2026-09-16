@@ -1,0 +1,6 @@
+WITH CTE AS (
+SELECT user_id, start_date, MIN(start_date) OVER(ORDER BY user_id) AS mini
+FROM users
+  )
+  SELECT *,  julianday(start_date) - julianday(mini) AS days_since_first_signup
+  FROM CTE

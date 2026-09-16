@@ -1,0 +1,7 @@
+SELECT 
+CASE WHEN strftime('%m', start_date) IN ('01','02','03','04','05','06') THEN "First Half"
+ELSE "Second Half" 
+END AS "Half_Year", COUNT(id)  AS Hire_Count
+
+FROM Staff
+GROUP BY Half_Year

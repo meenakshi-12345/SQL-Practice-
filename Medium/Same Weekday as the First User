@@ -1,0 +1,7 @@
+SELECT * FROM users 
+WHERE strftime('%w', start_date)= (
+SELECT strftime('%w', start_date) AS weekday
+FROM Users
+ORDER BY start_date
+LIMIT 1
+  )

@@ -1,0 +1,2 @@
+SELECT *, RANK() OVER(ORDER BY start_date) AS join_rank 
+FROM Users

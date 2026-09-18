@@ -1,0 +1,11 @@
+WITH CTE AS (
+SELECT u.user_id, 
+COUNT(DISTINCT e.visit_id) AS visits_with_purchases, 
+ COUNT(*) AS  total_purchases
+FROM users u 
+JOIN events e ON u.cookie_id = e.cookie_id
+WHERE e.event_type = 3
+GROUP BY u.user_id 
+  )
+  SELECT *, (1.0*total_purchases/visits_with_purchases) AS avg_purchases_per_visit
+  FROM CTE

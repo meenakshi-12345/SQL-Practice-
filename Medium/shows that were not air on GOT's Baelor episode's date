@@ -1,0 +1,3 @@
+SELECT title,episode_name 
+FROM shows 
+WHERE air_date!=(SELECT air_date FROM shows WHERE title='GOT' AND episode_name='Baelor')

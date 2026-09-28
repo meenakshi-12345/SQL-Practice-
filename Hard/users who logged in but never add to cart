@@ -1,0 +1,19 @@
+WITH CTE AS (
+SELECT user_id, activity_type 
+FROM Activities 
+WHERE activity_type = 'Login'
+GROUP BY activity_type,user_id 
+
+),
+CTE2 AS (
+SELECT user_id, activity_type 
+FROM Activities 
+WHERE activity_type = 'Add to Cart'
+GROUP BY activity_type,user_id 
+
+
+)
+
+SELECT COUNT(cte.user_id) - COUNT(cte2.user_id) AS logged_user_empty_cart
+FROM CTE 
+LEFT JOIN CTE2 ON cte.user_id = cte2.user_id

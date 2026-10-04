@@ -1,0 +1,23 @@
+-- Part 1 
+
+SELECT 	DISTINCT user_id FROM purchases 
+WHERE user_id NOT IN (
+
+SELECT user_id
+FROM purchases 
+GROUP BY user_id, product_id 
+HAVING COUNT(*)=2 )
+ORDER BY user_id
+
+--Part 2
+
+WITH CTE AS (
+SELECT user_id,MIN(purchase_date)  AS min_date, MAX(purchase_date) AS max_date
+FROM purchases 
+GROUP BY user_id 
+  )
+  SELECT user_id 
+  FROM CTE 
+  WHERE min_date BETWEEN '2024-01-01' AND '2024-01-31' AND max_date<'2024-01-31'
+  ORDER BY user_id
+

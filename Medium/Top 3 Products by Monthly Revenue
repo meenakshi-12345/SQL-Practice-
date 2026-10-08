@@ -1,0 +1,14 @@
+
+WITH CTE AS (
+SELECT product_id,MONTH(sale_date) AS mth, SUM(revenue) AS total_rev
+FROM sales 
+GROUP BY product_id,MONTH(sale_date)
+  ), 
+  CTE2 AS (
+  SELECT *, ROW_NUMBER() OVER(PARTITION BY mth ORDER BY total_rev DESC) AS rnk
+  FROM CTE
+    )
+    SELECT p.product_name, c.mth, c.total_rev
+    FROM CTE2 c 
+    JOIN products p ON p.product_id = c.product_id 
+    WHERE c.rnk < 4

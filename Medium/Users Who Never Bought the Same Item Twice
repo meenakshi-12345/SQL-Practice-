@@ -1,0 +1,12 @@
+
+WITH CTE AS(
+SELECT user_id, item_id, count(*) AS item_count
+FROM purchases 
+GROUP BY user_id, item_id 
+ORDER BY user_id
+)
+SELECT u.user_id, u.name FROM users u
+WHERE u.user_id NOT IN (
+SELECT user_id  AS excluded
+FROM CTE 
+WHERE item_count = 2)

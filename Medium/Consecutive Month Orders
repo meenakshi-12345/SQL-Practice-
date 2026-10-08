@@ -1,0 +1,18 @@
+
+WITH CTE AS (
+SELECT user_id, MONTH(order_date) AS month, LEAD(MONTH(order_date)) OVER(PARTITION BY user_id ORDER BY order_date ASC) AS next_month
+FROM orders 
+ORDER BY user_id,month
+  ), 
+  CTE2 AS (
+  SELECT *, 
+  CASE WHEN next_month - month = -11 THEN 1 
+  ELSE next_month - month END AS diff 
+  FROM CTE
+    )
+    SELECT DISTINCT c.user_id,u.name 
+    FROM users u 
+    JOIN CTE2 c ON u.user_id = c.user_id 
+    WHERE diff =1
+ 
+  

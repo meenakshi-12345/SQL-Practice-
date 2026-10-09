@@ -1,0 +1,14 @@
+
+WITH CTE AS (
+SELECT source, COUNT(*) AS total_sessions
+FROM sessions 
+GROUP BY source
+), CTE2 AS ( 
+SELECT DISTINCT c.source, c.total_sessions, SUM(converted) OVER(PARTITION BY s.source) AS conversions
+FROM CTE c 
+JOIN sessions s ON s.source = c.source
+  )
+  SELECT *,ROUND((conversions/total_sessions*100),1) AS conversion_pct
+  FROM CTE2
+  ORDER BY conversion_pct DESC
+

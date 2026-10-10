@@ -1,0 +1,8 @@
+SELECT content_id,
+COUNT(CASE WHEN action  like '%view%'  then 1 END) AS 'views', 
+COUNT(CASE WHEN action like  '%like%' then 1 END) AS 'likes',
+COUNT(CASE WHEN action like '%share%' then 1   END) AS 'shares',
+COUNT(CASE WHEN action like '%save%'  then 1 END )AS 'saves',
+COUNT(CASE WHEN action like '%comment%' then 1 END) AS 'comments' 
+FROM interactions
+GROUP BY content_id

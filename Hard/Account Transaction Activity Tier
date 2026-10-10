@@ -1,0 +1,12 @@
+WITH CTE AS (
+SELECT a.account_id AS account_id, a.user_id AS user_id, a.balance AS balance,  COUNT(t.txn_id) AS txn_count 
+FROM accounts a 
+JOIN transactions t ON a.account_id = t.account_id 
+GROUP BY a.account_id, a.user_id
+  )
+  SELECT *, 
+  CASE WHEN txn_count>=6 THEN 'high'
+       WHEN txn_count BETWEEN 3 AND 5 THEN 'moderate' 
+       WHEN txn_count BETWEEN 0 AND 2 THEN 'low' 
+       END AS activity_tier 
+       FROM CTE 

@@ -1,0 +1,7 @@
+SELECT p.patient_id, COUNT( DISTINCT q.provider_id) AS provider_count, COUNT(s.rx_id) AS rx_count 
+FROM patients p 
+JOIN prescriptions s ON p.patient_id = s.patient_id 
+JOIN providers q ON q.provider_id = s.provider_id
+GROUP BY p.patient_id
+HAVING COUNT( DISTINCT q.provider_id) > 1 
+ORDER BY provider_count ASC

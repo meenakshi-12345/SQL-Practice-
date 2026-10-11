@@ -1,0 +1,11 @@
+WITH CTE AS(
+        SELECT MONTH(created_at) as mth , SUM(value) AS total
+        FROM sf_transactions
+        WHERE value>=0
+        GROUP BY MONTH(created_at)
+        ORDER BY mth
+  )
+  SELECT mth, AVG(total) 	OVER(ORDER BY mth ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS  rolling_avg 
+  FROM CTE
+  ORDER BY mth
+  

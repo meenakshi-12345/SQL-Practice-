@@ -1,0 +1,6 @@
+WITH CTE AS (
+SELECT user_id, start_date, LAG(start_date) OVER(ORDER BY user_id) AS lagged
+FROM users
+  )
+  SELECT  MAX((JULIANDAY(start_date) - JULIANDAY(lagged))) AS max_gap
+  FROM CTE

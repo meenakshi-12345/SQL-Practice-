@@ -1,0 +1,7 @@
+SELECT * 
+FROM users WHERE start_date = (
+
+
+SELECT MIN(start_date) FROM users 
+WHERE start_date > (
+SELECT MIN(start_date) FROM users) )

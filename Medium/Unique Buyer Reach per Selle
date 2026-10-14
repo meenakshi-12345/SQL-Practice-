@@ -1,0 +1,5 @@
+SELECT s.seller_id, COUNT(DISTINCT b.buyer_id) AS unique_buyers 
+FROM Sellers s 
+JOIN transactions t ON s.seller_id = t.seller_id 
+JOIN buyers b ON b.buyer_id = t.buyer_id
+GROUP BY s.seller_id

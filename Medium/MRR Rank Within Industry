@@ -1,0 +1,4 @@
+SELECT a.account_id, a.company_name, a.industry, s.mrr, RANK() OVER(ORDER BY mrr DESC) AS industry_rank 
+FROM accounts a 
+JOIN subscriptions s ON a.account_id = s.account_id
+WHERE status = 'active'

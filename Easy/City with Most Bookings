@@ -1,0 +1,6 @@
+SELECT l.city, COUNT(b.booking_id) AS bookings 
+FROM listings l 
+JOIN bookings b ON b.listing_id = l.listing_id 
+GROUP BY l.city
+ORDER BY bookings DESC
+LIMIT 1

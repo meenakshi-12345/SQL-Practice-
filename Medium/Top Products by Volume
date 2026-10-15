@@ -1,0 +1,9 @@
+WITH CTE AS (
+SELECT p.product_id, COUNT(o.product_id) AS items_sold, RANK() OVER(ORDER BY COUNT(o.product_id) DESC  ) AS rnk
+FROM products p 
+JOIN order_items o ON p.product_id = o.product_id
+GROUP BY p.product_id 
+)
+SELECT *
+FROM CTE 
+WHERE rnk<4

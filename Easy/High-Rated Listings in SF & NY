@@ -1,0 +1,12 @@
+
+WITH CTE AS (
+SELECT l.listing_id AS listing_id, l.name AS name, total_reviews, AVG(r.rating) AS avg
+FROM listings l 
+JOIN reviews r ON l.listing_id = r.listing_id 
+WHERE l.city IN ('San Francisco', 'New York')
+GROUP BY l.listing_id, l.name
+HAVING AVG(r.rating) >=4.5
+) 
+SELECT listing_id, name
+FROM CTE 
+WHERE total_reviews>=10

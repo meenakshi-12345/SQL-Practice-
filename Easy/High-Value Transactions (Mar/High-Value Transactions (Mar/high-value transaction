@@ -1,0 +1,5 @@
+SELECT *, 
+CASE WHEN status = 'success' THEN 'successful' 
+     WHEN status = 'failed' THEN  'failed' END AS outcome
+FROM transactions 
+WHERE transaction_date BETWEEN '2024-03-01' AND '2024-04-30' AND amount>500 

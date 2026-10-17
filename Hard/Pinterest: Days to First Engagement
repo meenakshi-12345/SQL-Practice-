@@ -1,0 +1,12 @@
+WITH CTE AS (
+SELECT u.user_id AS user_id, u.username AS username, u.joined_at AS joined_at, 
+  MIN(i.occurred_at) AS first_interaction_at
+  
+FROM users u 
+JOIN interactions i ON u.user_id = i.user_id 
+JOIN content co ON co.content_id = i.content_id
+GROUP BY u.user_id, u.username, u.joined_at
+)
+SELECT user_id, username, joined_at,first_interaction_at, DATEDIFF(first_interaction_at, joined_at) AS days_to_first_engagement
+FROM CTE 
+ORDER BY days_to_first_engagement

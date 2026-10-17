@@ -1,0 +1,11 @@
+WITH CTE AS(
+SELECT DATE_FORMAT(created_at, '%Y-%m') AS order_month, COUNT(*) AS order_count
+FROM ORDERS
+GROUP BY order_month 
+  ), 
+  CTE2 AS (
+  SELECT order_month, order_count, LAG(order_count) OVER(ORDER BY order_month) AS prev_month_change 
+  FROM CTE
+    )
+  SELECT order_month, order_count, prev_month_change, (order_count-prev_month_change) AS mom_change 
+  FROM CTE2

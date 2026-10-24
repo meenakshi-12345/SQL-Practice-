@@ -1,0 +1,9 @@
+WITH CTE AS (
+SELECT u.channel AS channel,COUNT(*) AS session_count, SUM(s.converted) AS conversions
+FROM users u 
+JOIN sessions s ON u.user_id = s.user_id
+GROUP BY u.channel
+)
+SELECT *,ROUND((conversions*1.0/session_count * 100),2) AS conversion_rate 
+FROM CTE
+GROUP BY channel

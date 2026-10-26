@@ -1,0 +1,3 @@
+SELECT u.user_id, o.order_id,o.created_at,o.subtotal, ROUND(AVG(o.subtotal) OVER(ORDER BY created_at ROWS BETWEEN 2 PRECEDING AND CURRENT ROW),2) AS rolling_3_avg 
+FROM users u 
+JOIN orders o ON u.user_id = o.user_id

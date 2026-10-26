@@ -1,0 +1,6 @@
+
+SELECT 'TOTAL' AS action, COUNT(*) AS count FROM interactions
+UNION ALL
+SELECT action, COUNT(*) AS count 
+FROM interactions
+GROUP BY action

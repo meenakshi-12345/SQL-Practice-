@@ -1,0 +1,8 @@
+SELECT
+    emp_id,
+    name,
+    salary,
+    ROUND(PERCENT_RANK() OVER (ORDER BY salary), 2) AS pct_rank
+FROM employees
+WHERE is_active = 1
+ORDER BY salary DESC;

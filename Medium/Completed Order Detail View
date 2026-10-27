@@ -1,0 +1,6 @@
+SELECT u.email, o.order_id, o.created_at, p.name AS product_name, p.category,q.unit_price 
+FROM users u
+JOIN orders o ON u.user_id = o.user_id 
+JOIN order_items q ON o.order_id = q.order_id 
+JOIN products p ON p.product_id= q.product_id 
+WHERE o.status LIKE '%completed%'

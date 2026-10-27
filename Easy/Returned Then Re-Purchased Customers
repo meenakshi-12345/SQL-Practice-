@@ -1,0 +1,9 @@
+WITH CTE AS (
+SELECT user_id, status, LAG(status) OVER(PARTITION BY user_id ORDER BY created_at) AS clue 
+FROM orders 
+ORDER BY user_id
+  )
+  SELECT u.email,u.user_id
+  FROM users u
+  JOIN CTE c ON u.user_id = c.user_id
+  WHERE c.status = 'completed' AND c.clue = 'returned'

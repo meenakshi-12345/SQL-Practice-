@@ -1,0 +1,9 @@
+WITH CTE AS (
+SELECT department_id, gender, SUM(salary) AS total_sal, RANK() OVER(PARTITION BY department_id ORDER BY SUM(salary) DESC) AS rnk
+FROM employees 
+GROUP BY department_id, gender
+ORDER BY department_id
+)
+  SELECT department_id, gender
+  FROM CTE 
+  WHERE rnk=1

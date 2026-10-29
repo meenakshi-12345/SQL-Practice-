@@ -1,0 +1,12 @@
+WITH CTE AS (
+SELECT t.category AS category,COUNT(t.txn_id) AS txn_count, SUM(t.amount) AS category_total
+FROM transactions t 
+WHERE t.status = 'completed'
+GROUP BY t.category
+),
+CTE2 AS (
+SELECT category,txn_count,category_total, SUM(category_total) OVER() AS totals FROM CTE
+  )
+  SELECT category,txn_count,category_total,ROUND((category_total/totals)*100,2) AS pct_of_spend
+       
+  FROM CTE2

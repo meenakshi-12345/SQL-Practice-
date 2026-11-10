@@ -1,0 +1,3 @@
+SELECT CONCAT('******',RIGHT(phone,4)) AS anon_phone, SUBSTRING(email,POSITION('@'IN email)+1, LENGTH(email)) AS email_domain,CAST(user_id AS INT)
+FROM social_media_pii_input
+ORDER BY anon_phone,email_domain,user_id

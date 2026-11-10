@@ -1,0 +1,4 @@
+SELECT u.device_os, COUNT(u.user_id) AS total_users, 
+SUM(CASE WHEN is_premium = 1 THEN 1 END) AS premium_users,  SUM(CASE WHEN is_premium = 1 THEN 1 END)*100.0/COUNT(u.user_id)  AS premium_pct
+FROM users u
+GROUP BY u.device_os

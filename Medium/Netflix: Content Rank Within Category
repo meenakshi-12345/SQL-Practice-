@@ -1,0 +1,5 @@
+SELECT c.content_id,c.category,COUNT(i.interaction_id) AS interaction_count,
+RANK() OVER(PARTITION BY c.category ORDER BY COUNT(i.interaction_id) DESC) AS category_rank
+FROM content c 
+JOIN interactions i ON c.content_id = i.content_id 
+GROUP BY c.category,c.content_id

@@ -1,0 +1,2 @@
+SELECT order_id, user_id, created_at, subtotal,SUM(subtotal) OVER(PARTITION BY user_id  ORDER BY created_at) AS running_total 
+FROM orders 

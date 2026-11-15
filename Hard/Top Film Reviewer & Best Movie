@@ -1,0 +1,16 @@
+(SELECT t.full_name AS results
+FROM trb_viewers t
+JOIN trb_film_ratings r ON r.viewer_id = t.viewer_id 
+GROUP BY t.full_name
+ORDER BY COUNT(*) DESC,t.full_name
+LIMIT 1 )
+
+UNION ALL (
+
+SELECT p.title AS results
+FROM trb_films p
+JOIN trb_film_ratings q ON p.film_id = q.film_id
+WHERE q.review_date BETWEEN '2020-02-01' AND '2020-02-29'
+GROUP BY p.title 
+ORDER BY AVG(q.rating) DESC,p.title 
+LIMIT 1)

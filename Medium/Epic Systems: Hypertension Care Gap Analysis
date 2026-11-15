@@ -1,0 +1,8 @@
+SELECT patient_id, dob, gender,zip_code 
+FROM patients WHERE patient_id IN (
+
+SELECT a.patient_id
+FROM diagnoses d 
+JOIN appointments a ON a.appt_id = d.appt_id
+JOIN prescriptions p ON a.patient_id = p.patient_id
+WHERE icd_code = 'I10' AND p.drug_name NOT IN('Lisinopril', 'Amlodipine','Furosemide'))

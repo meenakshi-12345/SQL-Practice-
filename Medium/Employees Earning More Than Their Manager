@@ -1,0 +1,5 @@
+SELECT e.name AS employee_name, b.name AS manager_name 
+FROM employees e 
+JOIN employees b ON e.manager_id = b.employee_id 
+WHERE e.salary > b.salary
+ORDER BY e.employee_id

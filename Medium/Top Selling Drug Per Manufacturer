@@ -1,0 +1,8 @@
+WITH CTE AS (
+SELECT manufacturer, drug,total_sales, RANK() OVER(PARTITION BY manufacturer ORDER BY total_sales DESC, drug) AS rnk 
+FROM pharmacy_sales 
+WHERE total_sales > 500000)
+SELECT  manufacturer, drug, CONCAT('$',ROUND((total_sales/1000000),0), ' million') AS total_sales
+FROM CTE 
+WHERE rnk = 1
+ORDER BY total_sales DESC

@@ -1,0 +1,8 @@
+WITH prev_time AS (
+SELECT user_id,trip_date, LEAD(trip_date)  OVER(PARTITION BY user_id ORDER BY trip_date) AS lg,
+  ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY trip_date,user_id) AS rnk
+FROM trips 
+)
+SELECT user_id, TIMESTAMPDIFF(SECOND, trip_date, lg)  / 3600.0 AS hours_between
+FROM prev_time
+WHERE rnk<2 AND TIMESTAMPDIFF(SECOND, trip_date, lg)  / 3600.0 >1

@@ -1,0 +1,9 @@
+with cte as (
+SELECT user_id,
+CASE WHEN COUNT(*) >= 12 THEN 'high_freq_2023' ELSE 'other_users' END AS label
+FROM orders
+WHERE order_date>='2023-01-01' AND order_date< '2024-01-01' 
+GROUP BY user_id  )
+SELECT label,COUNT(*) AS total_count
+FROM CTE 
+GROUP BY label

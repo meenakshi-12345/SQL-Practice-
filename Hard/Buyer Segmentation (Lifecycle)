@@ -1,0 +1,20 @@
+WITH prev_purchase AS (
+SELECT txn_id, buyer_id,amount,sold_date,LAG(sold_date) OVER(PARTITION BY buyer_id ORDER BY sold_date) AS lg 
+FROM transactions
+  ),
+  days_diff AS (
+  SELECT *, DATEDIFF(sold_date,lg) AS days_diff
+  FROM prev_purchase ),
+  
+  part1 AS (
+    SELECT txn_id, buyer_id,sold_date,amount,
+    CASE
+    WHEN days_diff IS NULL THEN 'new_buyer'
+    WHEN days_diff <=30 THEN 'regular_buyer'
+    WHEN days_diff >30 THEN 'reactivated_buyer'
+    END AS segment
+    FROM days_diff  )
+    
+   SELECT txn_id, segment 
+   FROM part1
+   ORDER BY txn_id

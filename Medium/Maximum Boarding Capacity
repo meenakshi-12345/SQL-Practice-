@@ -1,0 +1,7 @@
+WITH CTE AS (
+SELECT passenger_name, SUM(weight_kg) OVER (ORDER BY boarding_order) AS run 
+FROM mcb_sample
+)
+SELECT passenger_name 
+FROM CTE 
+WHERE run = 1000

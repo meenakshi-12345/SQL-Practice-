@@ -1,0 +1,7 @@
+SELECT p.category, p.product_name, RANK() OVER(PARTITION BY p.category ORDER BY SUM(s.revenue) DESC),
+    ROUND(SUM(s.revenue),0) AS revenue 
+    
+    FROM manufacture_product p 
+    JOIN manufacture_sales s ON p.product_id = s.product_id
+    GROUP BY p.category, p.product_name
+    ORDER BY p.category, revenue DESC, CAST(SUBSTRING(p.product_name FROM 8) AS INTEGER) ASC

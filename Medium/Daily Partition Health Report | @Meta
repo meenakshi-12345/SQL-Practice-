@@ -1,0 +1,9 @@
+SELECT table_name, row_count,
+
+CASE WHEN row_count>=1000 AND DATE(last_updated_at) = partition_date THEN 'HEALTHY' 
+       ELSE 'UNHEALTHY' 
+       END AS  health_status
+
+FROM  table_partitions 
+WHERE  partition_date = ' 2024-07-01' 
+ORDER BY HEALTH_STATUS, table_name 

@@ -1,0 +1,7 @@
+WITH CTE AS (
+SELECT cust_id, order_date,order_value, DENSE_RANK() OVER(PARTITION BY cust_id ORDER BY order_date, cust_id) AS rnk
+FROM orders 
+)
+SELECT cust_id, order_date,order_value
+FROM CTE 
+WHERE rnk=2

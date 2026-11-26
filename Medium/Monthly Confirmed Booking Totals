@@ -1,0 +1,6 @@
+SELECT YEAR(checkin_date) AS booking_year, MONTH(checkin_date) AS booking_month, COUNT(*) AS booking_count,
+SUM(nights) AS total_nights 
+FROM bookings 
+WHERE status = 'Confirmed'
+GROUP BY  YEAR(checkin_date),MONTH(checkin_date)
+ORDER BY YEAR(checkin_date),MONTH(checkin_date)
